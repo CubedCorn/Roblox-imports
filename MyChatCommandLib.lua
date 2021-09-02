@@ -25,6 +25,29 @@ else
                 Func(CommandArgs)
             end,
 
+            ['ChatPrint'] = function(FText, FColor)
+                game.StarterGui:SetCore('ChatMakeSystemMessage', {
+                    Text = FText,
+                    Color = FColor,
+                    Font = Enum.Font.SourceSansBold,
+                    FontSize = Enum.FontSize.Size18
+                })
+
+                --local Chat = game.Players.LocalPlayer.PlayerGui.Chat.Frame.ChatChannelParentFrame.Frame_MessageLogDisplay.Scroller:GetChildren()
+                --Chat[#Chat]:Remove()
+            end,
+
+            ['FindPlayer'] = function(Name)
+                for _, v in pairs(game.Players:GetPlayers()) do
+                    local Find1, Find2 = string.find(v.Name:lower(), Name:lower())
+                    if Find1 == nil then Find1, Find2 = string.find(v.DisplayName:lower(), Name:lower()) end
+                    
+                    if Find1 == 1 then
+                        return v
+                    end
+                end
+            end,
+
             ['Add'] = function(Cmd, Callback)
                 getgenv().CubedCommands.Commands[tostring(Cmd):lower()] = Callback
             end
